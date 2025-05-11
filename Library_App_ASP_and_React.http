@@ -1,0 +1,6 @@
+@Library_App_ASP_and_React_HostAddress = http://localhost:5124
+
+GET {{Library_App_ASP_and_React_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
