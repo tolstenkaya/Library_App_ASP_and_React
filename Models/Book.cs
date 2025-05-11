@@ -8,5 +8,6 @@
         public string Publishing_House { get; set; }
         public DateTime Publishing_Date { get; set; }
         public string Image {  get; set; }
+        public string Description { get; set; }
     }
 }
