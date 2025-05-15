@@ -31,5 +31,9 @@ namespace Library_App_ASP_and_React.Controllers
         public ActionResult<List<Book>> deleteBook(int id) {
             return libraryService.DeleteBook(id);
         }
+        [HttpPut("/{id}")]
+        public ActionResult<List<Book>> updateBook([FromBody]Book updated_book) {
+            return libraryService.UpdateBook(updated_book);
+        }
     }
 }

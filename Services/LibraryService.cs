@@ -33,5 +33,12 @@ namespace Library_App_ASP_and_React.Services
             }
             return _context.Books.ToList();
         }
+
+        public List <Book> UpdateBook(Book book)
+        {
+            _context.Books.Update(book);
+            _context.SaveChanges();
+            return _context.Books.ToList();
+        }
     }
 }
