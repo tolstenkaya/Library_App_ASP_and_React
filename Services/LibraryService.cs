@@ -1,17 +1,37 @@
-﻿using Library_App_ASP_and_React.Models;
+﻿using Library_App_ASP_and_React.Context;
+using Library_App_ASP_and_React.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library_App_ASP_and_React.Services
 {
     public class LibraryService
     {
-        public List<Book> books = new List<Book>()
-        {
-            new Book(){Id=Guid.NewGuid().ToString(), Title="Yuriy Kisil. Road to the dream.", Author="Yuriy Kisil", Publishing_House="ESL Pro League", Publishing_Date=new DateTime(2027,3,9), Image="https://static-cdn.jtvnw.net/jtv_user_pictures/9d442cfb-4dcc-431a-b5de-e52b7eb08d5d-profile_image-70x70.png"}
-        };
+        private readonly AppDbContext _context;
 
-        public List<Book> GetAllBooks()
+        public LibraryService(AppDbContext context)
         {
-            return books;
+            _context = context;
+        }
+
+        public List<Book> GetBooks()
+        {
+            return _context.Books.ToList();
+        }
+
+        public List<Book> AddBook(Book book) {
+           _context.Books.Add(book);
+            _context.SaveChanges();
+            return _context.Books.ToList();
+        }
+
+        public List<Book> DeleteBook(int id) { 
+        var find_book = _context.Books.FirstOrDefault(x => x.Id == id);
+            if (find_book != null)
+            {
+                _context.Books.Remove(find_book);
+                _context.SaveChanges();
+            }
+            return _context.Books.ToList();
         }
     }
 }
