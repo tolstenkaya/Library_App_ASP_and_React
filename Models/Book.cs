@@ -11,7 +11,7 @@ namespace Library_App_ASP_and_React.Models
         public string Title { get; set; }
         public string Author { get; set; }
         public string Publishing_house { get; set; }
-        public DateTime Publishing_date { get; set; }
+        public DateOnly Publishing_date { get; set; }
         public string Image {  get; set; }
     }
 }
