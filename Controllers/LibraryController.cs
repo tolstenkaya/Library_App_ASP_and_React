@@ -27,11 +27,12 @@ namespace Library_App_ASP_and_React.Controllers
             return libraryService.AddBook(new_book);
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult<List<Book>> deleteBook(int id) {
+            Console.WriteLine("Attempting to delete book with ID: " + id);
             return libraryService.DeleteBook(id);
         }
-        [HttpPut("/{id}")]
+        [HttpPut("{id}")]
         public ActionResult<List<Book>> updateBook([FromBody]Book updated_book) {
             return libraryService.UpdateBook(updated_book);
         }
