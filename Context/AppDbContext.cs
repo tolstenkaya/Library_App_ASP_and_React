@@ -6,6 +6,8 @@ namespace Library_App_ASP_and_React.Context
     public class AppDbContext : DbContext
     {
         public DbSet<Book> Books { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Category> Categories { get; set; } = null !;
         public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
         }
