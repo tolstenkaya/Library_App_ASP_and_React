@@ -15,6 +15,16 @@ namespace Library_App_ASP_and_React.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<UserRelationBook>().HasKey(urb => new { urb.UserId, urb.BookId });
+
+            modelBuilder.Entity<UserRelationBook>()
+            .HasOne(urb => urb.User)
+            .WithMany(u => u.UserBooks)
+            .HasForeignKey(urb => urb.UserId);
+
+            modelBuilder.Entity<UserRelationBook>()
+            .HasOne(urb=>urb.Book)
+            .WithMany(b=>b.UserBooks)
+            .HasForeignKey(b=>b.BookId);
         }
     }
 }

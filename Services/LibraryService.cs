@@ -1,5 +1,7 @@
 ﻿using Library_App_ASP_and_React.Context;
 using Library_App_ASP_and_React.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library_App_ASP_and_React.Services
@@ -11,6 +13,26 @@ namespace Library_App_ASP_and_React.Services
         public LibraryService(AppDbContext context)
         {
             _context = context;
+        }
+
+        public ServiceResult AddNewUser(User new_user)
+        {
+            if (_context.Users.Any(u => u.UserEmail == new_user.UserEmail))
+            {
+                return new ServiceResult(false, "User with the email exists!");
+            }
+
+            var user = new User
+            {
+                UserName = new_user.UserName,
+                UserEmail = new_user.UserEmail,
+                Password = PasswordHasher.Hash(new_user.Password),
+                ImagePath = new_user.ImagePath,
+            };
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return new ServiceResult(true, $"Welcome user {user.UserName}");
         }
 
         public List<Book> GetBooks()

@@ -15,6 +15,21 @@ namespace Library_App_ASP_and_React.Controllers
             libraryService = _libraryService;
         }
 
+        [HttpPost("signup")]
+        public IActionResult createNewUser([FromBody] User user)
+        {
+            var adding_result = libraryService.AddNewUser(user);
+            if (adding_result.state == false)
+            {
+                return BadRequest(adding_result.message);
+            }
+            else
+            {
+                return Ok(adding_result.message);
+            }
+        }
+        
+
         [HttpGet]
         public ActionResult<List<Book>> getBooks()
         {
